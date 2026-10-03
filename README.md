@@ -46,7 +46,13 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 │       ├── mason.lua
 │       ├── autocompletion.lua
 │       ├── git.lua
-│       └── terminal.lua
+│       ├── terminal.lua
+│       ├── treesitter.lua
+│       ├── which-key.lua
+│       ├── autopairs.lua
+│       ├── comment.lua
+│       └── indent-blankline.lua
+├── POSSIBLE_UPGRADES.md     # Future plugin ideas
 └── README.md
 ```
 
@@ -140,6 +146,40 @@ Leader key: `Space`
 - `<leader>tb` - Toggle inline blame (shows blame on every line)
 - `<leader>hd` - Diff this file
 - `<leader>td` - Toggle deleted lines view
+
+### Code Editing
+**Comment Toggle:**
+- `gcc` - Toggle comment on current line
+- `gc` + motion - Toggle comment (e.g., `gcap` for paragraph)
+- `gc` in visual mode - Toggle comment on selection
+
+**Auto-pairs:**
+- Automatically closes `()`, `{}`, `[]`, `""`, `''`
+- Deletes pairs together when backspacing
+- Works with completion
+
+**Treesitter Text Objects:**
+- `<C-Space>` - Start incremental selection
+- `<C-Space>` again - Expand selection to next node
+- `<Backspace>` - Shrink selection
+
+### Which-key Helper
+- Press `<leader>` and wait 300ms - Shows available keybindings
+- Works with any partial key sequence (e.g., `<leader>g` shows all git commands)
+- Helps discover keybindings you forgot
+
+## Features
+
+### Treesitter
+- **Better syntax highlighting** - Semantic, not regex-based
+- **Smart indentation** - Understands code structure
+- **Text objects** - Select functions, classes, etc.
+- **Auto-installed parsers** for common languages
+
+### Indent Guides
+- Visual vertical lines showing indentation levels
+- Highlights current scope
+- Auto-hidden in certain buffers (terminal, file explorer, etc.)
 
 ## Adding Plugins
 

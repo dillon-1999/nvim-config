@@ -75,6 +75,11 @@ Leader key: `Space`
 - `<leader>tf` - Toggle floating terminal
 - `<leader>th` - Toggle horizontal terminal (bottom)
 - `<leader>tv` - Toggle vertical terminal (side)
+- `<leader>t1` - Terminal 1 (horizontal)
+- `<leader>t2` - Terminal 2 (horizontal)
+- `<leader>t3` - Terminal 3 (horizontal)
+- `<leader>t4` - Terminal 4 (horizontal)
+- `<leader>ta` - Toggle all terminals
 - `<Esc>` - Exit terminal mode (when in terminal)
 - `<C-h/j/k/l>` - Navigate between terminal and editor splits
 

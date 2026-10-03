@@ -77,5 +77,14 @@ return {
     vim.keymap.set("n", "<leader>th", "<cmd>lua _HORIZONTAL_TERM_TOGGLE()<CR>", { desc = "Toggle horizontal terminal" })
     vim.keymap.set("n", "<leader>tv", "<cmd>lua _VERTICAL_TERM_TOGGLE()<CR>", { desc = "Toggle vertical terminal" })
     vim.keymap.set("n", "<C-\\>", "<cmd>ToggleTerm<CR>", { desc = "Toggle terminal" })
+
+    -- Numbered terminals for multiple instances
+    vim.keymap.set("n", "<leader>t1", "<cmd>ToggleTerm 1 direction=horizontal<CR>", { desc = "Terminal 1 (horizontal)" })
+    vim.keymap.set("n", "<leader>t2", "<cmd>ToggleTerm 2 direction=horizontal<CR>", { desc = "Terminal 2 (horizontal)" })
+    vim.keymap.set("n", "<leader>t3", "<cmd>ToggleTerm 3 direction=horizontal<CR>", { desc = "Terminal 3 (horizontal)" })
+    vim.keymap.set("n", "<leader>t4", "<cmd>ToggleTerm 4 direction=horizontal<CR>", { desc = "Terminal 4 (horizontal)" })
+
+    -- Toggle all terminals at once
+    vim.keymap.set("n", "<leader>ta", "<cmd>ToggleTermToggleAll<CR>", { desc = "Toggle all terminals" })
   end,
 }

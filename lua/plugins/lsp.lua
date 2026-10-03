@@ -7,9 +7,7 @@ return {
     { "antosha417/nvim-lsp-file-operations", config = true },
   },
   config = function()
-    local lspconfig = require("lspconfig")
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
     local keymap = vim.keymap
 
     local opts = { noremap = true, silent = true }
@@ -67,45 +65,59 @@ return {
       vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
     end
 
-    -- Configure LSP servers
+    -- LSP server configurations
     local servers = {
-      "ts_ls",        -- TypeScript/JavaScript
-      "pyright",      -- Python
-      "lua_ls",       -- Lua
-      "gopls",        -- Go
-      "rust_analyzer", -- Rust
-      "clangd",       -- C/C++
-      "jdtls",        -- Java
-      "html",         -- HTML
-      "cssls",        -- CSS
-      "jsonls",       -- JSON
-      "tailwindcss",  -- Tailwind CSS
-    }
-
-    for _, lsp in ipairs(servers) do
-      lspconfig[lsp].setup({
-        capabilities = capabilities,
-        on_attach = on_attach,
-      })
-    end
-
-    -- Special configuration for Lua
-    lspconfig.lua_ls.setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          workspace = {
-            library = {
-              [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-              [vim.fn.stdpath("config") .. "/lua"] = true,
+      ts_ls = {},        -- TypeScript/JavaScript
+      pyright = {},      -- Python
+      lua_ls = {         -- Lua
+        settings = {
+          Lua = {
+            diagnostics = {
+              globals = { "vim" },
+            },
+            workspace = {
+              library = {
+                [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+                [vim.fn.stdpath("config") .. "/lua"] = true,
+              },
             },
           },
         },
       },
-    })
+      gopls = {},        -- Go
+      rust_analyzer = {}, -- Rust
+      clangd = {},       -- C/C++
+      jdtls = {},        -- Java
+      html = {},         -- HTML
+      cssls = {},        -- CSS
+      jsonls = {},       -- JSON
+      tailwindcss = {},  -- Tailwind CSS
+    }
+
+    -- Setup LSP servers using the modern approach
+    -- Check if vim.lsp.config exists (Neovim 0.11+)
+    if vim.lsp.config then
+      -- Modern Neovim 0.11+ API
+      for server_name, config in pairs(servers) do
+        local server_config = vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }, config)
+
+        vim.lsp.config[server_name] = server_config
+        vim.lsp.enable(server_name)
+      end
+    else
+      -- Fallback to lspconfig for older Neovim versions
+      local lspconfig = require("lspconfig")
+      for server_name, config in pairs(servers) do
+        local server_config = vim.tbl_deep_extend("force", {
+          capabilities = capabilities,
+          on_attach = on_attach,
+        }, config)
+
+        lspconfig[server_name].setup(server_config)
+      end
+    end
   end,
 }

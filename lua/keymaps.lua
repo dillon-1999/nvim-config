@@ -12,7 +12,21 @@ keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 keymap.set("n", "<leader>rc", function()
   vim.cmd("source $MYVIMRC")
   vim.notify("Config reloaded! Syncing plugins...", vim.log.levels.INFO)
-  vim.cmd("Lazy sync")
+
+  -- Sync plugins and auto-close when done
+  require("lazy").sync({
+    wait = false,
+    show = true,
+  })
+
+  -- Auto-close Lazy window after sync completes
+  vim.defer_fn(function()
+    local lazy_view = require("lazy.view")
+    if lazy_view.visible() then
+      vim.cmd("close")
+      vim.notify("Plugins synced!", vim.log.levels.INFO)
+    end
+  end, 3000) -- Wait 3 seconds for sync to complete
 end, { desc = "Reload Neovim config and sync plugins" })
 
 -- Window navigation

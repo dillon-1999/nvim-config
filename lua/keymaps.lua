@@ -11,8 +11,9 @@ keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 -- Reload Neovim config
 keymap.set("n", "<leader>rc", function()
   vim.cmd("source $MYVIMRC")
-  vim.notify("Config reloaded!", vim.log.levels.INFO)
-end, { desc = "Reload Neovim config" })
+  vim.notify("Config reloaded! Syncing plugins...", vim.log.levels.INFO)
+  vim.cmd("Lazy sync")
+end, { desc = "Reload Neovim config and sync plugins" })
 
 -- Window navigation
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })

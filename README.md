@@ -21,7 +21,7 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 
 2. **Clone this repository:**
    ```bash
-   git clone <your-repo-url> ~/.config/nvim
+   git clone https://github.com/dillon-1999/nvim-config.git ~/.config/nvim
    ```
 
 3. **Start Neovim:**

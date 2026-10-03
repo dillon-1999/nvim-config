@@ -57,7 +57,8 @@ Leader key: `Space`
 ### General
 - `<leader>w` - Save file
 - `<leader>q` - Quit
-- `<leader>rc` - Reload Neovim config
+- `<leader>rc` - Reload config and install new plugins (doesn't update existing)
+- `<leader>rC` - Full plugin sync (updates all plugins)
 - `<leader>nh` - Clear search highlights
 
 ### Windows

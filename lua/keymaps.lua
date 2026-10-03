@@ -8,26 +8,47 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
--- Reload Neovim config
+-- Reload Neovim config (install new plugins only)
 keymap.set("n", "<leader>rc", function()
   vim.cmd("source $MYVIMRC")
-  vim.notify("Config reloaded! Syncing plugins...", vim.log.levels.INFO)
 
-  -- Sync plugins and auto-close when done
+  -- Check if there are any missing plugins
+  local lazy = require("lazy")
+  local missing = {}
+  for _, plugin in pairs(lazy.plugins()) do
+    if not plugin._.installed then
+      table.insert(missing, plugin.name)
+    end
+  end
+
+  if #missing > 0 then
+    vim.notify("Installing " .. #missing .. " new plugin(s)...", vim.log.levels.INFO)
+    lazy.install({
+      wait = false,
+      show = true,
+    })
+
+    -- Auto-close Lazy window after install completes
+    vim.defer_fn(function()
+      local lazy_view = require("lazy.view")
+      if lazy_view.visible() then
+        vim.cmd("close")
+        vim.notify("Plugins installed!", vim.log.levels.INFO)
+      end
+    end, 3000)
+  else
+    vim.notify("Config reloaded! No new plugins to install.", vim.log.levels.INFO)
+  end
+end, { desc = "Reload config and install new plugins" })
+
+-- Full plugin sync (install, update, clean)
+keymap.set("n", "<leader>rC", function()
+  vim.notify("Syncing all plugins...", vim.log.levels.INFO)
   require("lazy").sync({
     wait = false,
     show = true,
   })
-
-  -- Auto-close Lazy window after sync completes
-  vim.defer_fn(function()
-    local lazy_view = require("lazy.view")
-    if lazy_view.visible() then
-      vim.cmd("close")
-      vim.notify("Plugins synced!", vim.log.levels.INFO)
-    end
-  end, 3000) -- Wait 3 seconds for sync to complete
-end, { desc = "Reload Neovim config and sync plugins" })
+end, { desc = "Full plugin sync (update all)" })
 
 -- Window navigation
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })

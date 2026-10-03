@@ -45,7 +45,8 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 │       ├── lsp.lua
 │       ├── mason.lua
 │       ├── autocompletion.lua
-│       └── git.lua
+│       ├── git.lua
+│       └── terminal.lua
 └── README.md
 ```
 
@@ -68,6 +69,14 @@ Leader key: `Space`
 ### Buffers
 - `<S-h>` - Previous buffer
 - `<S-l>` - Next buffer
+
+### Terminal
+- `<C-\>` - Toggle terminal (quick access)
+- `<leader>tf` - Toggle floating terminal
+- `<leader>th` - Toggle horizontal terminal (bottom)
+- `<leader>tv` - Toggle vertical terminal (side)
+- `<Esc>` - Exit terminal mode (when in terminal)
+- `<C-h/j/k/l>` - Navigate between terminal and editor splits
 
 ### Plugins
 - `<leader>e` - Toggle file explorer

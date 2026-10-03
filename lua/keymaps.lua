@@ -8,6 +8,12 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>w", ":w<CR>", { desc = "Save file" })
 keymap.set("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
+-- Reload Neovim config
+keymap.set("n", "<leader>rc", function()
+  vim.cmd("source $MYVIMRC")
+  vim.notify("Config reloaded!", vim.log.levels.INFO)
+end, { desc = "Reload Neovim config" })
+
 -- Window navigation
 keymap.set("n", "<C-h>", "<C-w>h", { desc = "Move to left window" })
 keymap.set("n", "<C-j>", "<C-w>j", { desc = "Move to bottom window" })

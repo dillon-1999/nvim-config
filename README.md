@@ -56,6 +56,7 @@ Leader key: `Space`
 ### General
 - `<leader>w` - Save file
 - `<leader>q` - Quit
+- `<leader>rc` - Reload Neovim config
 - `<leader>nh` - Clear search highlights
 
 ### Windows

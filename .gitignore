@@ -1,0 +1,2 @@
+# Ignore plugin data (managed by lazy.nvim)
+lazy-lock.json

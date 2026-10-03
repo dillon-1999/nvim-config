@@ -8,6 +8,8 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 - Neovim >= 0.9.0
 - Git
 - A [Nerd Font](https://www.nerdfonts.com/) (optional, for icons)
+- Node.js (for some LSP servers)
+- Python 3 (for Python LSP)
 
 ### Fresh Installation
 
@@ -27,7 +29,7 @@ Portable Neovim configuration using lazy.nvim plugin manager.
    nvim
    ```
 
-   Plugins will automatically install on first launch.
+   Plugins and LSP servers will automatically install on first launch.
 
 ## Structure
 
@@ -39,7 +41,10 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 │   ├── keymaps.lua          # Key mappings
 │   └── plugins/             # Plugin configurations
 │       ├── colorscheme.lua
-│       └── example.lua
+│       ├── example.lua
+│       ├── lsp.lua
+│       ├── mason.lua
+│       └── autocompletion.lua
 └── README.md
 ```
 
@@ -68,6 +73,28 @@ Leader key: `Space`
 - `<leader>fg` - Live grep
 - `<leader>fb` - Find buffers
 
+### LSP (Language Server Protocol)
+- `gD` - Go to declaration
+- `gd` - Go to definition
+- `gi` - Go to implementation
+- `gt` - Go to type definition
+- `gR` - Show references
+- `K` - Show documentation (hover)
+- `<leader>ca` - Code actions
+- `<leader>rn` - Rename symbol
+- `<leader>d` - Show line diagnostics
+- `<leader>D` - Show buffer diagnostics
+- `[d` - Previous diagnostic
+- `]d` - Next diagnostic
+- `<leader>rs` - Restart LSP
+
+### Autocompletion
+- `<C-k>` - Previous suggestion
+- `<C-j>` - Next suggestion
+- `<C-Space>` - Trigger completion
+- `<C-e>` - Close completion
+- `<CR>` - Confirm selection
+
 ## Adding Plugins
 
 Add new plugin files in `lua/plugins/` directory. Each file should return a table with plugin specs.
@@ -82,8 +109,24 @@ return {
 }
 ```
 
+## Language Support
+
+LSP servers are automatically installed for:
+- TypeScript/JavaScript (ts_ls)
+- Python (pyright)
+- Lua (lua_ls)
+- Go (gopls)
+- Rust (rust_analyzer)
+- C/C++ (clangd)
+- Java (jdtls)
+- HTML, CSS, JSON
+- Tailwind CSS
+
+Mason will auto-install these servers on first launch. You can manage LSP servers with `:Mason`.
+
 ## Customization
 
 - **Settings:** Edit `lua/settings.lua`
 - **Keymaps:** Edit `lua/keymaps.lua`
 - **Plugins:** Add files to `lua/plugins/`
+- **LSP Servers:** Modify `lua/plugins/mason.lua`

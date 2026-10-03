@@ -44,7 +44,8 @@ Portable Neovim configuration using lazy.nvim plugin manager.
 │       ├── example.lua
 │       ├── lsp.lua
 │       ├── mason.lua
-│       └── autocompletion.lua
+│       ├── autocompletion.lua
+│       └── git.lua
 └── README.md
 ```
 
@@ -94,6 +95,35 @@ Leader key: `Space`
 - `<C-Space>` - Trigger completion
 - `<C-e>` - Close completion
 - `<CR>` - Confirm selection
+
+### Git Integration
+**Git Status & Commands:**
+- `<leader>gs` - Git status (opens fugitive panel)
+- `<leader>gc` - Git commit
+- `<leader>gp` - Git push
+- `<leader>gl` - Git pull
+- `<leader>gb` - Git blame
+
+**Viewing Diffs:**
+- `<leader>gd` - Git diff split (compare working vs staged)
+- `<leader>gv` - Open DiffView (visual diff of all changes)
+- `<leader>gf` - File history (git log for current file)
+- `<leader>gF` - Project history (git log for entire project)
+- `<leader>gx` - Close DiffView
+
+**Hunk Operations (inline changes):**
+- `]c` - Next git change (hunk)
+- `[c` - Previous git change (hunk)
+- `<leader>hp` - Preview hunk (show diff in floating window)
+- `<leader>hs` - Stage hunk
+- `<leader>hr` - Reset hunk (discard changes)
+- `<leader>hS` - Stage entire buffer
+- `<leader>hR` - Reset entire buffer
+- `<leader>hu` - Undo stage hunk
+- `<leader>hb` - Blame line (who changed this line)
+- `<leader>tb` - Toggle inline blame (shows blame on every line)
+- `<leader>hd` - Diff this file
+- `<leader>td` - Toggle deleted lines view
 
 ## Adding Plugins
 
